@@ -10,10 +10,77 @@ namespace CountriesEFC
         static void Main(string[] args)
         {
             var db = new ApplicationDbContext();
-            foreach (var c in db.Countries
+            // vypis dat
+            /*foreach (var c in db.Countries
                 .Include(c => c.Continent)
                 .ToList()
             )
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //1
+            /*foreach (var c in db.Countries.OrderBy(c => c.Name).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //2
+            /*foreach (var c in db.Countries.OrderByDescending(c => (c.Population / c.LandArea)).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //3
+            /*foreach (var c in db.Countries.Include(c => c.Continent).Where(c => c.Continent.Name == "Europe").ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //4
+            /*foreach (var c in db.Countries.Where(c => c.FertilityRate > 2).OrderByDescending(c => c.FertilityRate).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //5
+            /*foreach (var c in db.Countries.Select(c => new { Name = c.Name, CountryEconomic = (c.GDP / c.Population) }).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //6
+            /*foreach (var c in db.Countries.Include(c => c.Continent).GroupBy(c => c.Continent.Name).Select(g => new { Name = g.Key, Count = g.Count() }).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //7
+            /*foreach (var c in db.Countries.Include(c => c.Continent).GroupBy(c => c.Continent.Name).Select(g => new { Name = g.Key, Population = g.Sum(c => c.Population) }).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //8
+            /*foreach (var c in db.Countries.OrderByDescending(c => c.Population).Take(5).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //9
+            /*foreach (var c in db.Countries.OrderByDescending(c => (c.Population / c.LandArea)).Take(5).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //10
+            /*foreach (var c in db.Countries.Where(c => c.Name.StartsWith("C")).ToList())
+            {
+                Console.WriteLine(c);
+            }*/
+
+            //11
+            foreach (var c in db.Countries.Include(c => c.Continent).GroupBy(c => c.Continent.Name).Select(g => new { Name = g.Key, FertilityRate = g.Average(c => c.FertilityRate) }).ToList())
             {
                 Console.WriteLine(c);
             }
